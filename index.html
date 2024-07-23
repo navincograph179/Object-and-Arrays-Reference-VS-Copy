@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>JS Reference VS Copy</title>
-  <link rel="icon" href="https://fav.farm/🔥" />
+  <link rel="icon" href="./assets/logo.png" />
 </head>
 <body>
 
@@ -16,19 +16,26 @@
     // name2 = name;
     // console.table(name, name2);
 
-    let greeting = "Good morning";
-    let greeting2 = greeting;
-    console.log(greeting, greeting2)
-    greeting = "Good Afternoon";
-    console.log(greeting, greeting2)
+    // let greeting = "Good morning";
+    // let greeting2 = greeting;
+    // console.log(greeting, greeting2);
+    // greeting = "Good Afternoon";
+    // console.log(greeting, greeting2);
 
-    // Let's say we have an array
+    // // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
-    // and we want to make a copy of it.
-
-    // You might think we can just do something like this:
-
+    // // and we want to make a copy of it.
+    const group = players;
+    console.table(players, group)
+    group[0] ="Tommy";
+    console.log(players, group)
+    // // You might think we can just do something like this:
+    const group2 = players.slice();
+    console.log(group2)
+    group2[0] = 'Jackie'
+    console.log(players);
+    console.log(group2)
     // however what happens when we update that array?
 
     // now here is the problem!
@@ -42,9 +49,16 @@
     // one way
 
     // or create a new array and concat the old one in
-
+    const group3 = [].concat(players)
+    console.log(group3)
     // or use the new ES6 Spread
+    const group4 = [...players]
+    group4[0] = 'change'
+    console.log(group4)
+    console.log(players)
 
+    const group5 = Array.from(players)
+    console.log(group5)
     // now when we update it, the original one isn't changed
 
     // The same thing goes for objects, let's say we have a person object
@@ -56,13 +70,31 @@
     };
 
     // and think we make a copy:
-
+      // const p1 = person;
+      // console.log(p1)
+      // p1.gender = 'male'
     // how do we take a copy instead?
-
+      const p2 = Object.assign({}, person, {age : 88, gender: 'female'})
+      console.log(p2)
+      console.log(person)
     // We will hopefully soon see the object ...spread
-
+      const p3 = {...person};
+      console.table(p2)
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+      const people = {
+        name : "john",
+        age : 25,
+        social : {
+          facebook : 'faceboooook',
+          twitter : 'twit'
+        }
+      };
+      console.clear();
+      const dev = Object.assign({}, people)
+      console.table(dev)
 
+      const dev2 = JSON.parse(JSON.stringify(dev));
+      
   </script>
 
 </body>
